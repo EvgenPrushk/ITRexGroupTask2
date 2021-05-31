@@ -1,69 +1,55 @@
 console.log(
-  Potentials(
-    [
-      ["#", "#", "#", "#", "#", "#", "#", "#", "#"],
+  Potentials([
+    ["#", "#", "#", "#", "#", "#", "#", "#", "#"],
 
-      ["#", "+", "+", "+", "#", "+", "+", "+", "#"],
+    ["#", "+", "+", "+", "#", "+", "+", "+", "#"],
 
-      ["#", "+", "#", "+", "#", "+", "#", "+", "#"],
+    ["#", "+", "#", "+", "#", "+", "#", "+", "#"],
 
-      ["#", "+", "#", "+", "0", "+", "#", "+", "#"],
+    ["#", "+", "#", "+", "0", "+", "#", "+", "#"],
 
-      ["#", "#", "#", "+", "#", "#", "#", "#", "#"],
+    ["#", "#", "#", "+", "#", "#", "#", "#", "#"],
 
-      ["#", "#", "+", "+", "#", "#", "#", "#", "#"],
+    ["#", "#", "+", "+", "#", "#", "#", "#", "#"],
 
-      ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
-
-     
-    ]
-  )
+    ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
+  ])
 );
 function Potentials(stringMatrix) {
-  // Converting a matrix to a binary system
-  const matrix = [];
-  const startPoint = [];
-  const endPoint = [];
+//Converting a matrix to a binary system
+const matrix = [];
+const startPoint = [];
+const endPoint = [];
 
-  for (let y = 0; y < stringMatrix.length; y++) {
-    row = [];
+for (let y = 0; y < stringMatrix.length; y++) {
+  row = [];
 
-    for (let x = 0; x < stringMatrix[y].length; x++) {
-      if (stringMatrix[y][x] === "#") {
-        row.push(1);
-      } else if (stringMatrix[y][x] === "+") {
-        row.push(0);
-      
-        if(x === 0 || y === 0 || x === stringMatrix[y].length - 1 || y === stringMatrix.length - 1) {
-          endPoint.push(x, y)
-        }
-          // stringMatrix.length - 1 ||
-          // stringMatrix[y].length - 1
-      
-      } else if (stringMatrix[y][x] === "0") {
-        row.push(0);
-        startPoint.push(x, y);
+  for (let x = 0; x < stringMatrix[y].length; x++) {
+    if (stringMatrix[y][x] === "#") {
+      row.push(1);
+    } else if (stringMatrix[y][x] === "+") {
+      row.push(0);
+
+      if (
+        x === 0 ||
+        y === 0 ||
+        x === stringMatrix[y].length - 1 ||
+        y === stringMatrix.length - 1
+      ) {
+        endPoint.push(x, y);
       }
+    } else if (stringMatrix[y][x] === "0") {
+      row.push(0);
+      startPoint.push(x, y);
     }
+  }
 
-    matrix.push(row);
-  } 
+  matrix.push(row);
+}
   console.log(endPoint);
 
   [x1, y1] = startPoint;
   [x2, y2] = endPoint;
-
-
-
-  // else if (matrix[0][x] === 0) {
-  //   End.push(matrix[0][x]);
-  // } else if (matrix[matrix.length - 1][x] === 0) {
-  //   End.push(matrix[matrix.length - 1][x]);
-  // } else if (matrix[matrix[y].length - 1][y] === 0) {
-  //   End.push(matrix[matrix[y].length - 1][y]);
-  // }
-
- 
 
   potentials = getPotentialMatrix(matrix, [x1, y1], [x2, y2]);
 
