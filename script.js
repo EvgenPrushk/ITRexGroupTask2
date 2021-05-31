@@ -7,7 +7,7 @@ console.log(
 
       ["#", "+", "#", "+", "#", "+", "#", "+", "#"],
 
-      ["+", "+", "#", "+", "0", "+", "#", "+", "#"],
+      ["#", "+", "#", "+", "0", "+", "#", "+", "#"],
 
       ["#", "#", "#", "+", "#", "#", "#", "#", "#"],
 
@@ -15,20 +15,16 @@ console.log(
 
       ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
 
-      ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
-      ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
-      ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
-      ["#", "#", "+", "#", "#", "#", "#", "#", "#"],
-      ["#", "#", "+", "+", "#", "#", "#", "#", "#"],
-      ["#", "#", "#", "+", "#", "#", "#", "#", "#"],
-    ],
-    [3, 12]
+     
+    ]
   )
 );
-function Potentials(stringMatrix, [x2, y2]) {
+function Potentials(stringMatrix) {
   // Converting a matrix to a binary system
   const matrix = [];
-  const Start = [];
+  const startPoint = [];
+  const endPoint = [];
+
   for (let y = 0; y < stringMatrix.length; y++) {
     row = [];
 
@@ -37,16 +33,37 @@ function Potentials(stringMatrix, [x2, y2]) {
         row.push(1);
       } else if (stringMatrix[y][x] === "+") {
         row.push(0);
+      
+        if(x === 0 || y === 0 || x === stringMatrix[y].length - 1 || y === stringMatrix.length - 1) {
+          endPoint.push(x, y)
+        }
+          // stringMatrix.length - 1 ||
+          // stringMatrix[y].length - 1
+      
       } else if (stringMatrix[y][x] === "0") {
         row.push(0);
-        Start.push(x, y);
+        startPoint.push(x, y);
       }
     }
 
     matrix.push(row);
-  }
+  } 
+  console.log(endPoint);
 
-  [x1, y1] = Start;
+  [x1, y1] = startPoint;
+  [x2, y2] = endPoint;
+
+
+
+  // else if (matrix[0][x] === 0) {
+  //   End.push(matrix[0][x]);
+  // } else if (matrix[matrix.length - 1][x] === 0) {
+  //   End.push(matrix[matrix.length - 1][x]);
+  // } else if (matrix[matrix[y].length - 1][y] === 0) {
+  //   End.push(matrix[matrix[y].length - 1][y]);
+  // }
+
+ 
 
   potentials = getPotentialMatrix(matrix, [x1, y1], [x2, y2]);
 
